@@ -29,6 +29,7 @@ build: clean
 	# please use the following command instead. This will ensure, a docker volume is
 	# responsible for incrementally saving the dependencies and avoids the time taken to download
 	# all dependencies every time.
+	docker rm $(BUILDER_CONTAINER_NAME) || true
 	docker run --name $(BUILDER_CONTAINER_NAME) \
 		-v "m2:/root/.m2" \
 		-v "`pwd`:/build" \

@@ -51,3 +51,32 @@ DELETE http://localhost:8080/greetings/{{deleteGreetingId}}
 
 
 # TODO add requests for your own endpoints!
+###
+POST http://localhost:8080/events/add
+Content-Type: application/json
+
+{
+    "eventId" : 0,
+    "name" : "Event 1",
+    "date" : "2021-09-01",
+    "location" : "Location 1",
+    "userId" : 0,
+    "usernames" : ["user1", "user2"]
+}
+
+###
+@userId = 0
+GET http://localhost:8080/events/user/{{userId}}
+
+###
+@eventId = 0
+DELETE http://localhost:8080/events/{{eventId}}
+
+###
+@username = "user1"
+GET http://localhost:8080/events/username/{{username}}
+
+###
+@username = "user1"
+@eventId = 0
+POST http://localhost:8080/events/invite/{{username}}/{{eventId}}
