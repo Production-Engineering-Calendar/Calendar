@@ -1,4 +1,4 @@
-package main.java.ro.unibuc.hello.model;
+package ro.unibuc.hello.model;
 
 @Getter
 @Setter
