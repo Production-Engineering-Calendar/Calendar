@@ -10,7 +10,7 @@ import ro.unibuc.hello.data.InformationRepository;
 import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
-@EnableMongoRepositories(basePackageClasses = InformationRepository.class)
+@EnableMongoRepositories(basePackages = "ro.unibuc.hello")
 public class HelloApplication {
 
 	@Autowired

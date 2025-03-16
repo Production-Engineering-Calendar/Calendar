@@ -51,3 +51,33 @@ DELETE http://localhost:8080/greetings/{{deleteGreetingId}}
 
 
 # TODO add requests for your own endpoints!
+
+### Inregistreaza un utilizator nou
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuserv5",
+    "email": "testv5@example.com",
+    "password": "testpasswordv5"
+}
+
+### Autentificare utilizator
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuserv5",
+    "password": "testpasswordv5"
+}
+
+### Obtine lista tuturor utilizatorilor
+GET http://localhost:8080/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcnY0IiwiaWF0IjoxNzQyMTM2MTc1LCJleHAiOjE3NDIyMjI1NzV9.vefpJJyS9wHoOODeSSGw0t1Wc_ZqqLTw6_ZQDRazffM
+
+### Obtine informatii despre un utilizator
+GET http://localhost:8080/api/users/testuserv4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcnY0IiwiaWF0IjoxNzQyMTM2MTc1LCJleHAiOjE3NDIyMjI1NzV9.vefpJJyS9wHoOODeSSGw0t1Wc_ZqqLTw6_ZQDRazffM
+
+### Sterge un utilizator
+DELETE http://localhost:8080/api/users/testuser
