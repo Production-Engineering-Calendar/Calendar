@@ -52,14 +52,26 @@ DELETE http://localhost:8080/greetings/{{deleteGreetingId}}
 
 # TODO add requests for your own endpoints!
 
-### Inregistreaza un utilizator nou
+### Inregistreaza un utilizator nou cu rol de user
 POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "testuserv5",
-    "email": "testv5@example.com",
-    "password": "testpasswordv5"
+    "username": "testuserv8",
+    "email": "testv8@example.com",
+    "password": "testpasswordv8",
+    "admin": false
+}
+
+### Inregistreaza un utilizator nou cu rol de admin
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "adminuserv3",
+    "email": "adminv3@example.com",
+    "password": "adminpasswordv3",
+    "admin": true
 }
 
 ### Autentificare utilizator
@@ -67,17 +79,26 @@ POST http://localhost:8080/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "testuserv5",
-    "password": "testpasswordv5"
+    "username": "testuserv8",
+    "password": "testpasswordv8"
 }
 
-### Obtine lista tuturor utilizatorilor
-GET http://localhost:8080/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcnY0IiwiaWF0IjoxNzQyMTM2MTc1LCJleHAiOjE3NDIyMjI1NzV9.vefpJJyS9wHoOODeSSGw0t1Wc_ZqqLTw6_ZQDRazffM
+### Autentificare utilizator cu rol de admin
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
 
-### Obtine informatii despre un utilizator
-GET http://localhost:8080/api/users/testuserv4
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcnY0IiwiaWF0IjoxNzQyMTM2MTc1LCJleHAiOjE3NDIyMjI1NzV9.vefpJJyS9wHoOODeSSGw0t1Wc_ZqqLTw6_ZQDRazffM
+{
+    "username": "adminuserv3",
+    "password": "adminpasswordv3"
+}
 
-### Sterge un utilizator
-DELETE http://localhost:8080/api/users/testuser
+# ### Obtine lista tuturor utilizatorilor
+# GET http://localhost:8080/api/users
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnVzZXJ2MiIsImlhdCI6MTc0MjEzODUxNywiZXhwIjoxNzQyMjI0OTE3fQ.gUog4AX5elospmFb4vwD5uiqBPPKVhP-RQWA3JbXh1o
+
+# ### Obtine informatii despre un utilizator
+# GET http://localhost:8080/api/users/testuser
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcnY0IiwiaWF0IjoxNzQyMTM2MTc1LCJleHAiOjE3NDIyMjI1NzV9.vefpJJyS9wHoOODeSSGw0t1Wc_ZqqLTw6_ZQDRazffM
+
+# ### Sterge un utilizator
+# DELETE http://localhost:8080/api/users/testuser
