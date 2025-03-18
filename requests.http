@@ -51,6 +51,59 @@ DELETE http://localhost:8080/greetings/{{deleteGreetingId}}
 
 # TODO add requests for your own endpoints!
 
+
+### Inregistreaza un utilizator nou cu rol de user
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuserv10",
+    "email": "testv10@example.com",
+    "password": "testpasswordv10",
+    "admin": false
+}
+
+### Inregistreaza un utilizator nou cu rol de admin
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "adminuserv4",
+    "email": "adminv4@example.com",
+    "password": "adminpasswordv4",
+    "admin": true
+}
+
+### Autentificare utilizator
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuserv10",
+    "password": "testpasswordv10"
+}
+
+### Autentificare utilizator cu rol de admin
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "adminuserv4",
+    "password": "adminpasswordv4"
+}
+
+# ### Obtine lista tuturor utilizatorilor
+# GET http://localhost:8080/api/users
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnVzZXJ2MiIsImlhdCI6MTc0MjEzODUxNywiZXhwIjoxNzQyMjI0OTE3fQ.gUog4AX5elospmFb4vwD5uiqBPPKVhP-RQWA3JbXh1o
+
+# ### Obtine informatii despre un utilizator
+# GET http://localhost:8080/api/users/testuser
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcnY0IiwiaWF0IjoxNzQyMTM2MTc1LCJleHAiOjE3NDIyMjI1NzV9.vefpJJyS9wHoOODeSSGw0t1Wc_ZqqLTw6_ZQDRazffM
+
+# ### Sterge un utilizator
+# DELETE http://localhost:8080/api/users/testuser
+
+
 ### Create a new notificare
 POST http://localhost:8080/notificare
 Content-Type: application/json
