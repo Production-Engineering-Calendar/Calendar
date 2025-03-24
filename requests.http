@@ -1,4 +1,3 @@
-
 # You can use this file to easily send requests to your API.
 # Prerequisite: humao.rest-client Vscode plugin (already present on codespace)
 # High-level overview of REST API concepts used here: https://www.packtpub.com/en-us/learning/how-to-tutorials/what-are-rest-verbs-and-status-codes-tutorial?srsltid=AfmBOoppDqtkhRxj5BLZONRZFzRDmh6eP-xyTo6H4OuEHYuVbrg1d4Dm
@@ -115,3 +114,20 @@ DELETE http://localhost:8080/api/auth/users/testuserv11
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcnYxMyIsImlhdCI6MTc0MjgxNDk4NiwiZXhwIjoxNzQyOTAxMzg2LCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.VE4kD0SXuS_egCNYO-r8OJpjJFtV2whD2sW16z26t2Y
 
 
+# ### Sterge un utilizator
+# DELETE http://localhost:8080/api/users/testuser
+
+
+### Create a new notificare
+POST http://localhost:8080/notificare
+Content-Type: application/json
+
+{
+  "notificareId": 1,
+  "eventId": 123,
+  "tipVerificare": "Sample Tip",
+  "verificare": true
+}
+
+### Get a notificare by eventId
+GET http://localhost:8080/notificare/123
