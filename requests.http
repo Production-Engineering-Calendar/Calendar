@@ -114,9 +114,6 @@ DELETE http://localhost:8080/api/auth/users/testuserv11
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcnYxMyIsImlhdCI6MTc0MjgxNDk4NiwiZXhwIjoxNzQyOTAxMzg2LCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.VE4kD0SXuS_egCNYO-r8OJpjJFtV2whD2sW16z26t2Y
 
 
-# ### Sterge un utilizator
-# DELETE http://localhost:8080/api/users/testuser
-
 
 ### Create a new notificare
 POST http://localhost:8080/notificare
