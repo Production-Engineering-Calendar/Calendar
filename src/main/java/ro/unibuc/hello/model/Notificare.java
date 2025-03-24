@@ -1,31 +1,35 @@
 package ro.unibuc.hello.model;
 
 
-//{notificareId, eventId, tipVerificare, bool verificare?}
-
 public class Notificare {
     
-    private int notificareId;
-    private int eventId;
+    private String notificareId;
+    private String eventId;
+    private String userId;
     private String tipVerificare;
     private boolean verificare;
 
     public Notificare() {
     }
     
-    public Notificare(int notificareId, int eventId, String tipVerificare, boolean verificare) {
+    public Notificare(String notificareId, String eventId, String userId, String tipVerificare, boolean verificare) {
         this.notificareId = notificareId;
         this.eventId = eventId;
+        this.userId = userId;
         this.tipVerificare = tipVerificare;
         this.verificare = verificare;
     }
 
-    public void setNotificareId(int notificareId) {
+    public void setNotificareId(String notificareId) {
         this.notificareId = notificareId;
     }
 
-    public void setEventId(int eventId) {
+    public void setEventId(String eventId) {
         this.eventId = eventId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public void setTipVerificare(String tipVerificare) {
@@ -36,12 +40,24 @@ public class Notificare {
         this.verificare = verificare;
     }
 
-    public int getNotificareId() {
+    public String getNotificareId() {
         return notificareId;
     }
 
-    public int getEventId() {
+    public String getEventId() {
         return eventId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getTipVerificare() {
+        return tipVerificare;
+    }
+
+    public boolean getVerificare() {
+        return verificare;
     }
 
 
