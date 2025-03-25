@@ -22,7 +22,7 @@ public class NotificareController {
 
     @GetMapping("/notificare")
     @ResponseBody
-    public Notificare notificare(@RequestParam(name="eventId", required=false, defaultValue=0) int eventId) {
+    public Notificare notificare(@RequestParam(name="eventId", required=false, defaultValue="0") String eventId) {
         return notificareService.getNotificareByEventId(eventId);
     }
 
@@ -34,16 +34,26 @@ public class NotificareController {
 
     @GetMapping("/notificare/{eventId}")
     @ResponseBody
-    public Notificare getNotificareByEventId(@PathVariable int eventId) {
+    public List<Notificare> getNotificariByEventId(@PathVariable String eventId) {
         return notificareService.getNotificareByEventId(eventId);
     }
 
-    // @GetMapping("/notificari")
-    // @ResponseBody
-    // public List<Notificare> getAllNotificari() {
-    //     return notificareService.getAllNotificari();
-    // }
+    @GetMapping("/notificare/user/{userId}")
+    @ResponseBody
+    public List<Notificare> getNotificareByUserId(@PathVariable String userId) {
+        return notificareService.getNotificareByUserId(userId);
+    }
 
+    @PostMapping("/notificare/user/{userId}")
+    @ResponseBody
+    public void createNotificaribyUserId(@PathVariable String userId) {
+        notificareService.createNotificaribyUserId(userId);
+    }
 
+    @PostMapping("/notificare/{notificareId}/accept")
+    @ResponseBody
+    public void acceptInvitation(@PathVariable String notificareId) {
+        notificareService.acceptInvitation(notificareId);
+    }
    
 }
