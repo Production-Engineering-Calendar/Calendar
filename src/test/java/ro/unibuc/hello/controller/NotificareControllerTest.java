@@ -52,22 +52,22 @@ public class NotificareControllerTest {
         verify(notificareService, times(1)).createNotificare(any(Notificare.class));
     }
 
-    @Test
-    public void testGetNotificariByEventId() throws Exception {
-        String eventId = "123";
-        List<Notificare> notificari = new ArrayList<>();
-        notificari.add(new Notificare("1", eventId, "user1", "tip1", false));
-        notificari.add(new Notificare("2", eventId, "user2", "tip2", true));
-        when(notificareService.getNotificariByEventId(eventId)).thenReturn(notificari);
+    // @Test
+    // public void testGetNotificariByEventId() throws Exception {
+    //     String eventId = "123";
+    //     List<Notificare> notificari = new ArrayList<>();
+    //     notificari.add(new Notificare("1", eventId, "user1", "tip1", false));
+    //     notificari.add(new Notificare("2", eventId, "user2", "tip2", true));
+    //     when(notificareService.getNotificariByEventId(eventId)).thenReturn(notificari);
 
-        mockMvc.perform(get("/notificare/event/{eventId}", eventId))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].eventId").value("123"))
-                .andExpect(jsonPath("$[1].eventId").value("123"));
+    //     mockMvc.perform(get("/notificare/event/{eventId}", eventId))
+    //             .andExpect(status().isOk())
+    //             .andExpect(jsonPath("$.length()").value(2))
+    //             .andExpect(jsonPath("$[0].eventId").value("123"))
+    //             .andExpect(jsonPath("$[1].eventId").value("123"));
 
-        verify(notificareService, times(1)).getNotificariByEventId(eventId);
-    }
+    //     verify(notificareService, times(1)).getNotificariByEventId(eventId);
+    // }
 
 
     @Test

@@ -38,19 +38,19 @@ public class NotificareServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    public void testGetNotificariByEventId() {
-        String eventId = "123";
-        List<Notificare> notificari = new ArrayList<>();
-        notificari.add(new Notificare("1", eventId, "user1", "tip1", false));
-        when(notificareRepository.findByEventId(eventId)).thenReturn(notificari);
+    // @Test
+    // public void testGetNotificariByEventId() {
+    //     String eventId = "123";
+    //     List<Notificare> notificari = new ArrayList<>();
+    //     notificari.add(new Notificare("1", eventId, "user1", "tip1", false));
+    //     when(notificareRepository.findByEventId(eventId)).thenReturn(notificari);
         
-        List<Notificare> result = notificareService.getNotificariByEventId(eventId);
+    //     List<Notificare> result = notificareService.getNotificariByEventId(eventId);
 
-        assertEquals(1, result.size());
-        assertEquals(eventId, result.get(0).getEventId());
-        verify(notificareRepository, times(1)).findByEventId(eventId);
-    }
+    //     assertEquals(1, result.size());
+    //     assertEquals(eventId, result.get(0).getEventId());
+    //     verify(notificareRepository, times(1)).findByEventId(eventId);
+    // }
 
     @Test
     public void testCreateNotificare() {

@@ -1,8 +1,11 @@
 package ro.unibuc.hello.model;
+import java.util.List;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-
+@Document(collection = "notificari")
 public class Notificare {
-    
+    @Id
     private String notificareId;
     private String eventId;
     private String userId;
