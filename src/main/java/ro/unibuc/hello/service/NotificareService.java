@@ -10,22 +10,25 @@ import ro.unibuc.hello.repository.UserRepository;
 
 import java.util.List;
 
-@Service
+@Component
 public class NotificareService {
+    @Autowired
     private final NotificareRepository notificareRepository;
+    @Autowired
     private final UserRepository userRepository;
+    @Autowired
     private final EventService eventService;
 
-    @Autowired
+    
     public NotificareService(NotificareRepository notificareRepository, UserRepository userRepository, EventService eventService) {
         this.notificareRepository = notificareRepository;
         this.userRepository = userRepository;
         this.eventService = eventService;
     }
 
-    // public List<Notificare> getNotificariByEventId(String eventId) {
-    //     return notificareRepository.findByEventId(eventId);
-    // }
+    public List<Notificare> getNotificariByEventId(String eventId) {
+        return notificareRepository.findByEventId(eventId);
+    }
 
     public List<Notificare> getNotificareByUserId(String userId) {
         return notificareRepository.findByUserId(userId);
