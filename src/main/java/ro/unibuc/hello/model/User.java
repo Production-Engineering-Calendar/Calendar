@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.HashSet;
 import java.util.Set;
 
-@Document(collection = "users")  
+@Document(collection = "users")
 public class User {
 
     @Id
@@ -14,7 +14,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private Set<String> roles = new HashSet<>(); 
+    private Set<String> roles = new HashSet<>();
 
     public User() {
     }

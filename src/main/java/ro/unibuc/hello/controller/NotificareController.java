@@ -14,43 +14,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@Controller
+@RestController
+@RequestMapping("/api/notificare")
 public class NotificareController {
 
-    @Autowired
     private NotificareService notificareService;
 
-    @GetMapping("/notificare")
-    @ResponseBody
-    public Notificare notificare(@RequestParam(name="eventId", required=false, defaultValue="0") String eventId) {
-        return notificareService.getNotificareByEventId(eventId);
-    }
+    // @GetMapping("/notificare")
+    // @ResponseBody
+    // public List<Notificare> notificare(@RequestParam(name="eventId", required=false, defaultValue="0") String eventId) {
+    //     return notificareService.getNotificariByEventId(eventId);
+    // }
 
-    @PostMapping("/notificare")
+    @PostMapping("/addNotificare")
     @ResponseBody
     public Notificare createNotificare(@RequestBody Notificare notificare) {
         return notificareService.createNotificare(notificare);
     }
 
-    @GetMapping("/notificare/{eventId}")
-    @ResponseBody
-    public List<Notificare> getNotificariByEventId(@PathVariable String eventId) {
-        return notificareService.getNotificareByEventId(eventId);
-    }
+    // @GetMapping("/notificariByEventId/{eventId}")
+    // @ResponseBody
+    // public List<Notificare> getNotificariByEventId(@PathVariable String eventId) {
+    //     return notificareService.getNotificareByEventId(eventId);
+    // }
 
-    @GetMapping("/notificare/user/{userId}")
+    @GetMapping("/notificariByUserId/{userId}")
     @ResponseBody
     public List<Notificare> getNotificareByUserId(@PathVariable String userId) {
         return notificareService.getNotificareByUserId(userId);
     }
 
-    @PostMapping("/notificare/user/{userId}")
+    @PostMapping("/addNotificareByUserId/{userId}")
     @ResponseBody
     public void createNotificaribyUserId(@PathVariable String userId) {
         notificareService.createNotificaribyUserId(userId);
     }
 
-    @PostMapping("/notificare/{notificareId}/accept")
+    @PostMapping("/acceptInvitation/{notificareId}")
     @ResponseBody
     public void acceptInvitation(@PathVariable String notificareId) {
         notificareService.acceptInvitation(notificareId);
