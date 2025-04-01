@@ -82,4 +82,8 @@ public class NotificareService {
         }
         return notificare;
     }
+
+    public void deleteAllNotificari() {
+        notificareRepository.deleteAll();
+    }
 }
