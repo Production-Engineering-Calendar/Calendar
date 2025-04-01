@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -145,11 +145,14 @@ public class NotificareServiceTest {
         Notificare notificare = new Notificare(notificareId, "123", "user1", "invitat", false);
         when(notificareRepository.findByNotificareId(notificareId)).thenReturn(notificare);
 
-        notificareService.acceptInvitation(notificareId);
-
-        assertEquals(true, notificare.getVerificare());
+        Notificare savedNotificare = notificareService.acceptInvitation(notificareId);
+        
         verify(notificareRepository, times(1)).findByNotificareId(notificareId);
-        verify(notificareRepository, times(1)).save(notificare);
+        verify(notificareRepository, times(1)).save(savedNotificare);
+
+        assertNotNull(savedNotificare);
+        assertEquals(notificareId, savedNotificare.getNotificareId());
+        assertEquals(true, savedNotificare.getVerificare());
     }
 
 

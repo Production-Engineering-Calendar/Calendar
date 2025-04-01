@@ -32,11 +32,11 @@ public class NotificareController {
         return notificareService.createNotificare(notificare);
     }
 
-    // @GetMapping("/notificariByEventId/{eventId}")
-    // @ResponseBody
-    // public List<Notificare> getNotificariByEventId(@PathVariable String eventId) {
-    //     return notificareService.getNotificareByEventId(eventId);
-    // }
+    @GetMapping("/notificariByEventId/{eventId}")
+    @ResponseBody
+    public List<Notificare> getNotificariByEventId(@PathVariable String eventId) {
+        return notificareService.getNotificariByEventId(eventId);
+    }
 
     @GetMapping("/notificariByUserId/{userId}")
     @ResponseBody
