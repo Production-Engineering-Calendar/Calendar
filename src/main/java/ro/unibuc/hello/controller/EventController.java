@@ -1,5 +1,6 @@
 package ro.unibuc.hello.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.unibuc.hello.model.Event;
 import ro.unibuc.hello.service.EventService;
@@ -48,5 +49,16 @@ public class EventController {
         return eventService.inviteUser(eventId, username)
             ? "User " + username + " invited successfully!"
             : "Event not found!";
+    }
+
+    @GetMapping("/{eventId}/accepted-usernames")
+    public ResponseEntity<List<String>> getAcceptedUsernames(@PathVariable String eventId) {
+        List<String> acceptedUsernames = eventService.getAcceptedUsernamesForEvent(eventId);
+
+        if (acceptedUsernames.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(acceptedUsernames);
     }
 }
