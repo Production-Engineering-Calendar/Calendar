@@ -21,7 +21,6 @@ public class NotificareService {
     private final UserRepository userRepository;
     @Autowired
     private final EventService eventService;
-
     
     public NotificareService(NotificareRepository notificareRepository, UserRepository userRepository, EventService eventService) {
         this.notificareRepository = notificareRepository;
