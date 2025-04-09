@@ -6,6 +6,7 @@ pipeline {
     environment {
         DOCKER_PASSWORD = credentials("docker_password")
         GITHUB_TOKEN = credentials("github_token")
+        IMAGE_TAG = "latest"
     }
 
     stages {
@@ -32,7 +33,14 @@ pipeline {
                     sh "git push https://$GITHUB_TOKEN@github.com/${DOCKER_PASSWORD_USR}/service.git ${env.IMAGE_TAG}"
             }
                 sh "docker build -t darialapadus/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} + 1)).${PATCH_VERSION} ."
-            }
+            }   
 }
     }
+      stage('Deploy Application') {
+            steps {
+                script {
+                    sh "IMAGE_TAG=${env.IMAGE_TAG} docker compose up -d hello mongo"
+                }
+            }
+        }
 }
