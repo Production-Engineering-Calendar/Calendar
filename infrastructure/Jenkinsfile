@@ -1,6 +1,6 @@
 pipeline {
     agent any
-        tools {
+    tools {
         jdk 'jdk21' // This name must match the JDK installation name used in Jenkins Global Tool Configuration
     }
     environment {
@@ -31,16 +31,16 @@ pipeline {
                     env.IMAGE_TAG = "${env.MAJOR_VERSION}.\$((${env.MINOR_VERSION} + 1)).${env.PATCH_VERSION}"
                     sh "git tag ${env.IMAGE_TAG}"
                     sh "git push https://$GITHUB_TOKEN@github.com/${DOCKER_PASSWORD_USR}/service.git ${env.IMAGE_TAG}"
-            }
+                }
                 sh "docker build -t darialapadus/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} + 1)).${PATCH_VERSION} ."
             }   
-}
-    }
-      stage('Deploy Application') {
-            steps {
-                script {
-                    sh "IMAGE_TAG=${env.IMAGE_TAG} docker compose up -d hello mongo"
+        }
+        stage('Deploy Application') {
+                steps {
+                    script {
+                        sh "IMAGE_TAG=${env.IMAGE_TAG} docker compose up -d hello mongo"
+                    }
                 }
             }
-        }
+    }
 }
