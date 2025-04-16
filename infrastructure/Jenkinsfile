@@ -29,7 +29,7 @@ pipeline {
         stage('Push Image'){
             steps{
                 script{
-                    sh "docker login docker.io -u cipy34 -p ${DOCKER_PASSWORD}"
+                    sh "docker login docker.io -u cipy34 -p ${DOCKER_PASSWORD_PSW}"
                     sh "docker push cipy34/hello-img:${IMAGE_VERSION}"
                 }
             }
