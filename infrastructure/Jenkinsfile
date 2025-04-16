@@ -30,7 +30,7 @@ pipeline {
             steps{
                 script{
                     sh "docker login docker.io -u cipy34 -p ${DOCKER_PASSWORD_PSW}"
-                    sh "docker push cipy34/hello-img:${IMAGE_VERSION}"
+                    sh "docker push cipy34/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} + 1)).${PATCH_VERSION}"
                 }
             }
         }
