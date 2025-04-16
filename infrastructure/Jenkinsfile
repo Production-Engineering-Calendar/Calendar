@@ -26,5 +26,15 @@ pipeline {
                 }
             }
         }
+        stage('Push Image'){
+            steps{
+                script{
+                    # Having the password in clear here is not a good practice. It should be added as a secret in Jenkins and fetched from it.
+                    docker login docker.io -u cipy34 -p ${DOCKER_PASSWORD}
+                    ## Publish the new image to a public repository
+                    docker push cipy34/hello-img:$IMAGE_VERSION
+                }
+            }
+        }
     }
 }
