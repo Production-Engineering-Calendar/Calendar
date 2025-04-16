@@ -6,7 +6,6 @@ pipeline {
     environment {
         DOCKER_PASSWORD = credentials("docker_password")
         GITHUB_TOKEN = credentials("github_token")
-        IMAGE_TAG = "latest"
     }
 
     stages {
