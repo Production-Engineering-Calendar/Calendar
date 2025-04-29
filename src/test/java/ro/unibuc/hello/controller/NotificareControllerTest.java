@@ -24,7 +24,6 @@
 //     @Mock
 //     private NotificareService notificareService;
 
-//     @InjectMocks
 //     private NotificareController notificareController;
 
 //     private MockMvc mockMvc;
@@ -33,6 +32,7 @@
 //     public void setUp() {
 //         MockitoAnnotations.openMocks(this);
 //         mockMvc = MockMvcBuilders.standaloneSetup(notificareController).build();
+//         notificareController = new NotificareController(notificareService);
 //     }
 
 

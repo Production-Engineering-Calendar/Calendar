@@ -21,6 +21,9 @@ public class NotificareController {
     @Autowired
     private NotificareService notificareService;
 
+    public NotificareController(NotificareService notificareService) {
+        this.notificareService = notificareService;
+    }
 
     @PostMapping("/addNotificare")
     @ResponseBody
@@ -48,8 +51,8 @@ public class NotificareController {
 
     @PostMapping("/acceptInvitation/{notificareId}")
     @ResponseBody
-    public void acceptInvitation(@PathVariable String notificareId) {
-        notificareService.acceptInvitation(notificareId);
+    public Notificare acceptInvitation(@PathVariable String notificareId) {
+        return notificareService.acceptInvitation(notificareId);
     }
    
 }

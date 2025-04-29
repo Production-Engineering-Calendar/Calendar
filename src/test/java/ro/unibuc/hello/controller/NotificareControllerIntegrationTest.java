@@ -74,7 +74,7 @@ public class NotificareControllerIntegrationTest {
     }
 
     @Test
-    public void testAcceptInvitation(String notificareId) throws Exception {
+    public void testAcceptInvitation() throws Exception {
         mockMvc.perform(post("/api/notificare/acceptInvitation/2"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

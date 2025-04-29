@@ -161,7 +161,7 @@ POST http://localhost:8080/api/notificare/addNotificare
 Content-Type: application/json
 
 {
-    "notificareId": "2",
+    "notificareId": "1",
     "eventId": "456",
     "userId": "user1",
     "tipVerificare": "invitat",
