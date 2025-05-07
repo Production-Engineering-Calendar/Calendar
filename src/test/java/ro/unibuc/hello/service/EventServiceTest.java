@@ -1,19 +1,19 @@
-// --- EventServiceTest.java ---
 package ro.unibuc.hello.service;
 
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import ro.unibuc.hello.model.Event;
 import ro.unibuc.hello.repository.EventRepository;
+import ro.unibuc.hello.repository.NotificareRepository;
+import ro.unibuc.hello.repository.UserRepository;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class EventServiceTest {
@@ -21,24 +21,37 @@ public class EventServiceTest {
     @Mock
     private EventRepository eventRepository;
 
+    @Mock
+    private UserRepository userRepository;
+
+    @Mock
+    private NotificareRepository notificareRepository;
+
+    @Mock
+    private MeterRegistry metricsRegistry;
+
     @InjectMocks
     private EventService eventService;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+        // Stub metric counter globally
+        Counter mockCounter = Mockito.mock(Counter.class);
+        when(metricsRegistry.counter(anyString(), anyString(), anyString())).thenReturn(mockCounter);
     }
 
     @Test
     public void testAddEvent() {
         Event event = new Event();
         event.setName("Test Event");
-        when(eventRepository.save(event)).thenReturn(event);
+        when(eventRepository.save(any(Event.class))).thenReturn(event);
 
         Event result = eventService.addEvent(event);
 
+        assertNotNull(result);
         assertEquals("Test Event", result.getName());
-        verify(eventRepository, times(1)).save(event);
+        verify(eventRepository).save(event);
     }
 
     @Test
@@ -49,8 +62,9 @@ public class EventServiceTest {
 
         Event result = eventService.getEventById("123");
 
+        assertNotNull(result);
         assertEquals("123", result.getEventId());
-        verify(eventRepository, times(1)).findByEventId("123");
+        verify(eventRepository).findByEventId("123");
     }
 
     @Test
@@ -60,7 +74,7 @@ public class EventServiceTest {
         boolean result = eventService.deleteEvent("123");
 
         assertTrue(result);
-        verify(eventRepository, times(1)).deleteById("123");
+        verify(eventRepository).deleteById("123");
     }
 
     @Test
@@ -70,7 +84,7 @@ public class EventServiceTest {
         boolean result = eventService.deleteEvent("456");
 
         assertFalse(result);
-        verify(eventRepository, never()).deleteById("456");
+        verify(eventRepository, never()).deleteById(anyString());
     }
 
     @Test
@@ -81,20 +95,22 @@ public class EventServiceTest {
         List<Event> result = eventService.getEventsByUserId("user1");
 
         assertEquals(2, result.size());
-        verify(eventRepository, times(1)).findByUserId("user1");
+        verify(eventRepository).findByUserId("user1");
     }
 
     @Test
     public void testInviteUser_found() {
         Event event = new Event();
         event.setEventId("e1");
+        event.setUsernames(new ArrayList<>());
+
         when(eventRepository.findByEventId("e1")).thenReturn(Optional.of(event));
         when(eventRepository.save(event)).thenReturn(event);
 
         boolean result = eventService.inviteUser("e1", "newUser");
 
-        assertTrue(event.getUsernames().contains("newUser"));
         assertTrue(result);
+        assertTrue(event.getUsernames().contains("newUser"));
         verify(eventRepository).save(event);
     }
 
