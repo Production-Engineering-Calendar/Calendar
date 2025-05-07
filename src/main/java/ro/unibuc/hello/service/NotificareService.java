@@ -1,5 +1,6 @@
 package ro.unibuc.hello.service;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.unibuc.hello.model.Event;
@@ -22,6 +23,9 @@ public class NotificareService {
     @Autowired
     private final EventService eventService;
 
+    @Autowired
+    private MeterRegistry metricsRegistry;
+
     
     public NotificareService(NotificareRepository notificareRepository, UserRepository userRepository, EventService eventService) {
         this.notificareRepository = notificareRepository;
@@ -34,16 +38,18 @@ public class NotificareService {
     }
 
     public List<Notificare> getNotificareByUserId(String userId) {
+        metricsRegistry.counter("num_request_notifications", "endpoint", "getNotificariByUserId").increment(1);
         return notificareRepository.findByUserId(userId);
     }
 
     public Notificare createNotificare(Notificare notificare) {
+        metricsRegistry.counter("num_created_notifications", "endpoint", "createNotificare").increment(1);
         return notificareRepository.save(notificare);
     }
 
     public void createNotificaribyUserId(String userId) {
         List<Notificare> notificari = notificareRepository.findByUserId(userId);
-
+        metricsRegistry.counter("times_createNotifByUserId", "endpoint", "createNotificaribyUserId").increment(1);
         eventService.getEventsByUserId(userId).forEach(event -> {
             boolean hasNotification = notificari.stream()
                 .anyMatch(notificare -> notificare.getEventId().equals(event.getEventId()));
@@ -54,6 +60,8 @@ public class NotificareService {
                 notificare.setTipVerificare("creator");
                 notificare.setVerificare(true);
                 createNotificare(notificare);
+
+                metricsRegistry.summary("invitations_per_notif", "eventId", event.getEventId()).record(event.getUsernames().size());
 
                 for (String username : event.getUsernames()) {
                     Notificare notificareInvitat = new Notificare();
@@ -70,12 +78,13 @@ public class NotificareService {
     }
 
     public List<Notificare> getNotificariByUserId(String userId) {
+        metricsRegistry.counter("num_request_notifications", "endpoint", "getNotificariByUserId").increment(1);
         return notificareRepository.findByUserId(userId);
     }
 
     public Notificare acceptInvitation(String notificareId) {
+        metricsRegistry.counter("num_accepted_notifications", "endpoint", "acceptInvitation").increment(1);;
         Notificare notificare = notificareRepository.findByNotificareId(notificareId);
-        System.out.println("Notificare: " + notificare);
         if (notificare != null) {
             notificare.setVerificare(true);
             Notificare savedNotificare = notificareRepository.save(notificare);
